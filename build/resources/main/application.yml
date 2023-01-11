@@ -3,12 +3,12 @@ server:
 
 spring:
   application:
-    name: demo
+    name: badjang
 
   datasource:
     platform: mysql
-    url: jdbc:mysql://server-max-umc.c8xcoqqmg96d.ap-northeast-2.rds.amazonaws.com/YouTubeDB?autoReconnect=true # 변경해주세요
-    username: admin # 변경해주세요
-    password: wjdqls529 # 변경해주세요
+    url: jdbc:mysql://database-1.cb340velpgam.ap-northeast-2.rds.amazonaws.com/badjangDB?autoReconnect=true # 변경해주세요
+    username: badjang2023 # 변경해주세요
+    password: badj2023 # 변경해주세요
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
     # driver-class-name: com.mysql.jdbc.Driver # mysql 5버전
