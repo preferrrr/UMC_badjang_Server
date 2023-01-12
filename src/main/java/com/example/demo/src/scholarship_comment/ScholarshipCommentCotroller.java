@@ -3,9 +3,9 @@ package com.example.demo.src.scholarship_comment;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.scholarship_comment.model.GetScholarshipCommentRes;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes;
+import com.example.demo.src.scholarship_comment.model.*;
+import com.example.demo.src.support_comment.model.PatchSupportCommentReq;
+import com.example.demo.src.support_comment.model.SupportComment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +62,25 @@ public class ScholarshipCommentCotroller {
         try {
             PostScholarshipCommentRes postScholarshipCommentRes = scholarshipCommentService.createScholarshipComment(postScholarshipCommentReq);
             return new BaseResponse<>(postScholarshipCommentRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 댓글 수정 API
+     * [PATCH] /scholarship/:scholarship_comment_idx
+     */
+    @ResponseBody
+    @PatchMapping("/{scholarship_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
+    public BaseResponse<String> modifyScholarshipComment(@PathVariable("scholarship_comment_idx") long scholarship_comment_idx, @RequestBody ScholarshipComment scholarshipComment) {
+        try {
+            // PathVariable로 들어온 idx랑 SupportComment.getIdx한 거랑 같을 때만 수정 되도록 예외 처리 해줘야함
+            PatchScholarshipCommentReq patchScholarshipCommentReq = new PatchScholarshipCommentReq(scholarship_comment_idx, scholarshipComment.getScholarship_comment_content());
+            scholarshipCommentService.modifyScholarshipComment(patchScholarshipCommentReq);
+
+            String result = "댓글이 수정되었습니다.";
+            return new BaseResponse<>(result);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }

@@ -1,7 +1,9 @@
 package com.example.demo.src.scholarship_comment;
 
 import com.example.demo.src.scholarship_comment.model.GetScholarshipCommentRes;
+import com.example.demo.src.scholarship_comment.model.PatchScholarshipCommentReq;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
+import com.example.demo.src.support_comment.model.PatchSupportCommentReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -76,6 +78,14 @@ public class ScholarshipCommentDao {
                         rs.getString("scholarship_comment_content"),
                         rs.getString("scholarship_comment_updateAt")), // RowMapper(위의 링크 참조): 원하는 결과값 형태로 받기
                 getScholarshipCommentParams); // 해당 닉네임을 갖는 모든 User 정보를 얻기 위해 jdbcTemplate 함수(Query, 객체 매핑 정보, Params)의 결과 반환
+    }
+
+
+    public int modifyScholarshipComment(PatchScholarshipCommentReq patchScholarshipCommentReq) {
+        String modifyScholarshipCommentQuery = "update Scholarship_Comment set scholarship_comment_content = ? where scholarship_comment_idx = ? ";
+        Object[] modifyScholarshipCommentParams = new Object[]{patchScholarshipCommentReq.getScholarship_comment_content(),patchScholarshipCommentReq.getScholarship_comment_idx()};
+
+        return this.jdbcTemplate.update(modifyScholarshipCommentQuery, modifyScholarshipCommentParams); // 대응시켜 매핑시켜 쿼리 요청(생성했으면 1, 실패했으면 0)
     }
 //
 //

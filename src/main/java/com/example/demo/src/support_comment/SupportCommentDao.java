@@ -1,11 +1,18 @@
 package com.example.demo.src.support_comment;
 
+import com.example.demo.config.BaseException;
+import com.example.demo.config.BaseResponse;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
 import com.example.demo.src.support_comment.model.GetSupportCommentRes;
+import com.example.demo.src.support_comment.model.PatchSupportCommentReq;
 import com.example.demo.src.support_comment.model.PostSupportCommentReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -42,4 +49,13 @@ public class SupportCommentDao {
         String lastInsertIdQuery = "select last_insert_id()"; // 가장 마지막에 삽입된(생성된) id값은 가져온다.
         return this.jdbcTemplate.queryForObject(lastInsertIdQuery, long.class); // 해당 쿼리문의 결과 마지막으로 삽인된 유저의 BoardIdx번호를 반환한다.
     }
+
+
+    public int modifySupportComment(PatchSupportCommentReq patchSupportCommentReq) {
+        String modifySupportCommentQuery = "update Support_Comment set support_comment_content = ? where support_comment_idx = ? ";
+        Object[] modifySupportCommentParams = new Object[]{patchSupportCommentReq.getSupport_comment_content(),patchSupportCommentReq.getSupport_comment_idx()}; // 주입될 값들(nickname, userIdx) 순
+
+        return this.jdbcTemplate.update(modifySupportCommentQuery, modifySupportCommentParams); // 대응시켜 매핑시켜 쿼리 요청(생성했으면 1, 실패했으면 0)
+    }
+
 }

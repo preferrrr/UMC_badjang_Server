@@ -4,9 +4,7 @@ import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes;
-import com.example.demo.src.support_comment.model.GetSupportCommentRes;
-import com.example.demo.src.support_comment.model.PostSupportCommentReq;
-import com.example.demo.src.support_comment.model.PostSupportCommentRes;
+import com.example.demo.src.support_comment.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +62,25 @@ public class SupportCommentController {
         try {
             PostSupportCommentRes postSupportCommentRes = supportCommentService.createSupportComment(postSupportCommentReq);
             return new BaseResponse<>(postSupportCommentRes);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+    /**
+     * 댓글 수정 API
+     * [PATCH] /support/:support_comment_idx
+     */
+    @ResponseBody
+    @PatchMapping("/{support_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
+    public BaseResponse<String> modifySupportComment(@PathVariable("support_comment_idx") long support_comment_idx, @RequestBody SupportComment supportComment) {
+        try {
+            // PathVariable로 들어온 idx랑 SupportComment.getIdx한 거랑 같을 때만 수정 되도록 예외 처리 해줘야함
+            PatchSupportCommentReq patchSupportCommentReq = new PatchSupportCommentReq(support_comment_idx, supportComment.getSupport_comment_content());
+            supportCommentService.modifySupportComment(patchSupportCommentReq);
+
+            String result = "댓글이 수정되었습니다.";
+            return new BaseResponse<>(result);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
