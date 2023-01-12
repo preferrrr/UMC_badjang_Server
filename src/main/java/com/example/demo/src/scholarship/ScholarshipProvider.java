@@ -1,9 +1,7 @@
 package com.example.demo.src.scholarship;
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.user.UserDao;
-import com.example.demo.src.user.model.*;
-import com.example.demo.utils.JwtService;
+import com.example.demo.src.scholarship.model.GetScholarshipRes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.demo.config.BaseResponseStatus.*;
 import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
 
 @Service

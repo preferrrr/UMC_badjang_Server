@@ -1,6 +1,6 @@
 package com.example.demo.src.scholarship;
 
-import com.example.demo.src.user.model.GetScholarshipRes;
+import com.example.demo.src.scholarship.model.GetScholarshipRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

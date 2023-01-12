@@ -10,41 +10,69 @@ com/example/demo/src/user/model/PostLoginRes.java
  com.example.demo.src.user.model.PostLoginRes
 com/example/demo/src/user/UserDao.java
  com.example.demo.src.user.UserDao
-com/example/demo/config/BaseResponseStatus.java
- com.example.demo.config.BaseResponseStatus
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
+com/example/demo/src/scholarship/ScholarshipDao.java
+ com.example.demo.src.scholarship.ScholarshipDao
+com/example/demo/src/scholarship_comment/model/GetScholarshipCommentRes.java
+ com.example.demo.src.scholarship_comment.model.GetScholarshipCommentRes
 com/example/demo/src/WebSecurityConfig.java
  com.example.demo.src.WebSecurityConfig
 com/example/demo/DemoApplication.java
  com.example.demo.DemoApplication
-com/example/demo/src/user/model/GetScholarshipRes.java
- com.example.demo.src.user.model.GetScholarshipRes
+com/example/demo/src/user/model/GetUserRes.java
+ com.example.demo.src.user.model.GetUserRes
 com/example/demo/src/user/model/PostLoginReq.java
  com.example.demo.src.user.model.PostLoginReq
 com/example/demo/config/secret/Secret.java
  com.example.demo.config.secret.Secret
 com/example/demo/src/user/model/PostUserRes.java
  com.example.demo.src.user.model.PostUserRes
+com/example/demo/src/scholarship/model/GetScholarshipRes.java
+ com.example.demo.src.scholarship.model.GetScholarshipRes
+com/example/demo/src/support_comment/model/GetSupportCommentRes.java
+ com.example.demo.src.support_comment.model.GetSupportCommentRes
+com/example/demo/src/user/model/User.java
+ com.example.demo.src.user.model.User
+com/example/demo/src/scholarship_comment/model/PostScholarshipCommentReq.java
+ com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
+com/example/demo/src/scholarship/ScholarshipService.java
+ com.example.demo.src.scholarship.ScholarshipService
+com/example/demo/src/scholarship_comment/model/PostScholarshipCommentRes.java
+ com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
+com/example/demo/config/BaseException.java
+ com.example.demo.config.BaseException
+com/example/demo/config/BaseResponseStatus.java
+ com.example.demo.config.BaseResponseStatus
 com/example/demo/src/user/UserController.java
  com.example.demo.src.user.UserController
 com/example/demo/config/BaseResponse.java
  com.example.demo.config.BaseResponse
-com/example/demo/src/user/model/User.java
- com.example.demo.src.user.model.User
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
-com/example/demo/src/scholarship/ScholarshipService.java
- com.example.demo.src.scholarship.ScholarshipService
-com/example/demo/src/user/model/GetUserRes.java
- com.example.demo.src.user.model.GetUserRes
-com/example/demo/config/BaseException.java
- com.example.demo.config.BaseException
 com/example/demo/src/scholarship/ScholarshipProvider.java
  com.example.demo.src.scholarship.ScholarshipProvider
-com/example/demo/src/scholarship/ScholarshipDao.java
- com.example.demo.src.scholarship.ScholarshipDao
 com/example/demo/src/scholarship/ScholarshipController.java
  com.example.demo.src.scholarship.ScholarshipController
+com/example/demo/src/support_comment/model/PostSupportCommentRes.java
+ com.example.demo.src.support_comment.model.PostSupportCommentRes
+com/example/demo/src/scholarship_comment/ScholarshipCommentCotroller.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentCotroller
+com/example/demo/src/support_comment/model/PostSupportCommentReq.java
+ com.example.demo.src.support_comment.model.PostSupportCommentReq
+com/example/demo/src/scholarship_comment/ScholarshipCommentDao.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentDao
+com/example/demo/src/scholarship_comment/ScholarshipCommentProvider.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentProvider
+com/example/demo/src/scholarship_comment/ScholarshipCommentService.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentService
+com/example/demo/src/support_comment/SupportCommentService.java
+ com.example.demo.src.support_comment.SupportCommentService
+com/example/demo/src/support_comment/SupportCommentController.java
+ com.example.demo.src.support_comment.SupportCommentController
+com/example/demo/src/support_comment/SupportCommentProvider.java
+ com.example.demo.src.support_comment.SupportCommentProvider
+com/example/demo/src/support_comment/SupportCommentDao.java
+ com.example.demo.src.support_comment.SupportCommentDao
