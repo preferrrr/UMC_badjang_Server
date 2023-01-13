@@ -1,17 +1,16 @@
 package com.example.demo.src.scholarship_comment;
 
 import com.example.demo.config.BaseException;
+import com.example.demo.src.scholarship_comment.model.DeleteScholarshipCommentReq;
 import com.example.demo.src.scholarship_comment.model.PatchScholarshipCommentReq;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
 import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes;
-import com.example.demo.src.support_comment.model.PatchSupportCommentReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.example.demo.config.BaseResponseStatus.DATABASE_ERROR;
-import static com.example.demo.config.BaseResponseStatus.PATCH_COMMENT_FAIL;
+import static com.example.demo.config.BaseResponseStatus.*;
 
 @Service
 public class ScholarshipCommentService {
@@ -37,6 +36,9 @@ public class ScholarshipCommentService {
         }
     }
 
+    /**
+     * 댓글 수정 API
+     */
     public void modifyScholarshipComment(PatchScholarshipCommentReq patchScholarshipCommentReq) throws BaseException {
         try {
             int result = scholarshipCommentDao.modifyScholarshipComment(patchScholarshipCommentReq); // 해당 과정이 무사히 수행되면 True(1), 그렇지 않으면 False(0)입니다.
@@ -46,6 +48,20 @@ public class ScholarshipCommentService {
         } catch (Exception exception) { // DB에 이상이 있는 경우 에러 메시지를 보냅니다.
             throw new BaseException(DATABASE_ERROR);
         }
-
     }
+
+    /**
+     * 댓글 삭제 API
+     */
+    public void deleteScholarshipComment(DeleteScholarshipCommentReq deleteScholarshipCommentReq) throws BaseException {
+        try {
+            int result = scholarshipCommentDao.deleteScholarshipComment(deleteScholarshipCommentReq);
+            if(result == 0) {
+                throw new BaseException(DELETE_FAIL_COMMENT);
+            }
+        } catch(Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
 }

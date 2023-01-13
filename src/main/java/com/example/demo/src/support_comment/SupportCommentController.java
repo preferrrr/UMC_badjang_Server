@@ -2,8 +2,6 @@ package com.example.demo.src.support_comment;
 
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes;
 import com.example.demo.src.support_comment.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +34,9 @@ public class SupportCommentController {
      */
     //Query String
     @ResponseBody
-    @GetMapping("") // (GET) 127.0.0.1:9000/app/users
+    @GetMapping("")
     public BaseResponse<List<GetSupportCommentRes>> getSupportComment(@RequestParam(required = true) Long support_idx) {
         try{
-            // Get Users
             List<GetSupportCommentRes> getSupportCommentRes = supportCommentProvider.getSupportComment(support_idx);
             return new BaseResponse<>(getSupportCommentRes);
         } catch(BaseException exception){
@@ -69,10 +66,10 @@ public class SupportCommentController {
 
     /**
      * 댓글 수정 API
-     * [PATCH] /support/:support_comment_idx
+     * [PATCH] /support/modify/:support_comment_idx
      */
     @ResponseBody
-    @PatchMapping("/{support_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
+    @PatchMapping("/modify/{support_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
     public BaseResponse<String> modifySupportComment(@PathVariable("support_comment_idx") long support_comment_idx, @RequestBody SupportComment supportComment) {
         try {
             // PathVariable로 들어온 idx랑 SupportComment.getIdx한 거랑 같을 때만 수정 되도록 예외 처리 해줘야함
@@ -85,6 +82,26 @@ public class SupportCommentController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
+
+    /**
+     * 댓글 삭제 API
+     * [DELETE] /support/delete/:support_comment_idx
+     */
+    @ResponseBody
+    @PatchMapping("/delete/{support_comment_idx}")
+    public BaseResponse<String> deleteSupportComment(@PathVariable("support_comment_idx") long support_comment_idx) {
+        try {
+            DeleteSupportCommentReq deleteSupportCommentReq = new DeleteSupportCommentReq(support_comment_idx);
+            supportCommentService.deleteSupportComment(deleteSupportCommentReq);
+
+            String result = "댓글이 삭제되었습니다.";
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>((exception.getStatus()));
+        }
+    }
+
+
 
 
 }

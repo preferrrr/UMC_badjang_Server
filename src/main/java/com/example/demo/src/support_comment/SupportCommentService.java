@@ -1,9 +1,8 @@
 package com.example.demo.src.support_comment;
 
 import com.example.demo.config.BaseException;
-import com.example.demo.src.scholarship_comment.ScholarshipCommentDao;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentReq;
-import com.example.demo.src.scholarship_comment.model.PostScholarshipCommentRes;
+
+import com.example.demo.src.support_comment.model.DeleteSupportCommentReq;
 import com.example.demo.src.support_comment.model.PatchSupportCommentReq;
 import com.example.demo.src.support_comment.model.PostSupportCommentReq;
 import com.example.demo.src.support_comment.model.PostSupportCommentRes;
@@ -38,6 +37,9 @@ public class SupportCommentService {
         }
     }
 
+    /**
+     * 댓글 수정 API
+     */
     public void modifySupportComment(PatchSupportCommentReq patchSupportCommentReq) throws BaseException {
         try {
             int result = supportCommentDao.modifySupportComment(patchSupportCommentReq); // 해당 과정이 무사히 수행되면 True(1), 그렇지 않으면 False(0)입니다.
@@ -49,4 +51,20 @@ public class SupportCommentService {
         }
 
     }
+
+    /**
+     * 댓글 삭제 API
+     */
+    public void deleteSupportComment(DeleteSupportCommentReq deleteSupportCommentReq) throws BaseException {
+        try {
+            int result = supportCommentDao.deleteSupportComment(deleteSupportCommentReq);
+            if(result == 0) {
+                throw new BaseException(DELETE_FAIL_COMMENT);
+            }
+        } catch(Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
+
 }
