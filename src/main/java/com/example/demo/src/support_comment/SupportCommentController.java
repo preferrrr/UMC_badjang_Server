@@ -15,7 +15,7 @@ import static com.example.demo.config.BaseResponseStatus.INVALID_USER_JWT;
 import static com.example.demo.config.BaseResponseStatus.POST_COMMENT_EMPTY_CONTENT;
 
 @RestController
-@RequestMapping("/support/comment")
+@RequestMapping("/supports/comment")
 public class SupportCommentController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,10 +33,9 @@ public class SupportCommentController {
 
     /**
      * 지원금 댓글 조회 API
-     * [GET] /support/comment?support_idx
+     * [GET] /supports/comment?support_idx
      * @return BaseResponse<List<GetSupportCommentRes>>
      */
-    //Query String
     @ResponseBody
     @GetMapping("")
     public BaseResponse<List<GetSupportCommentRes>> getSupportComment(@RequestParam(required = true) Long support_idx) {
@@ -51,9 +50,9 @@ public class SupportCommentController {
 
     /**
      * 댓글 작성 API
-     * [POST] /new-comment
+     * [POST] /supports/comment/new-comment
      */
-    // Body
+
     @ResponseBody
     @PostMapping("/new-comment")
     public BaseResponse<PostSupportCommentRes> createSupportComment(@RequestBody PostSupportCommentReq postSupportCommentReq) {
@@ -61,6 +60,13 @@ public class SupportCommentController {
             return new BaseResponse<>(POST_COMMENT_EMPTY_CONTENT);
         }
         try {
+            Long userIdxByJwt = jwtService.getUserIdx();
+            Long user_idx = postSupportCommentReq.getUser_idx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(user_idx != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+
             PostSupportCommentRes postSupportCommentRes = supportCommentService.createSupportComment(postSupportCommentReq);
             return new BaseResponse<>(postSupportCommentRes);
         } catch (BaseException exception) {
@@ -70,13 +76,13 @@ public class SupportCommentController {
 
     /**
      * 댓글 수정 API
-     * [PATCH] /support/comment/modify/:support_comment_idx
+     * [PATCH] /supports/comment/modify/:support_comment_idx
      */
     @ResponseBody
     @PatchMapping("/modify/{support_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
     public BaseResponse<String> modifySupportComment(@PathVariable("support_comment_idx") long support_comment_idx, @RequestBody SupportComment supportComment) {
         try {
-            Long userIdxByJwt = jwtService.getUserIdx();
+            Long userIdxByJwt = jwtService.getUserIdx(); // 토큰은 헤더에 있음
             Long user_idx = supportComment.getUser_idx();
             //userIdx와 접근한 유저가 같은지 확인
             if(user_idx != userIdxByJwt){
@@ -99,12 +105,20 @@ public class SupportCommentController {
 
     /**
      * 댓글 삭제 API
-     * [DELETE] /support/comment/delete/:support_comment_idx
+     * [DELETE] /supports/comment/delete/:support_comment_idx
      */
     @ResponseBody
     @PatchMapping("/delete/{support_comment_idx}")
-    public BaseResponse<String> deleteSupportComment(@PathVariable("support_comment_idx") long support_comment_idx) {
+    public BaseResponse<String> deleteSupportComment(@PathVariable("support_comment_idx") long support_comment_idx, @RequestBody SupportComment supportComment) {
         try {
+
+            Long userIdxByJwt = jwtService.getUserIdx();
+            Long user_idx = supportComment.getUser_idx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(user_idx != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+
             DeleteSupportCommentReq deleteSupportCommentReq = new DeleteSupportCommentReq(support_comment_idx);
             supportCommentService.deleteSupportComment(deleteSupportCommentReq);
 
@@ -119,4 +133,3 @@ public class SupportCommentController {
 
 
 }
-// test

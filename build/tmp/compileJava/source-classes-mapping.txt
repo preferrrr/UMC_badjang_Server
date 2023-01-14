@@ -48,43 +48,43 @@ com/example/demo/src/scholarship_comment/model/PatchScholarshipCommentReq.java
  com.example.demo.src.scholarship_comment.model.PatchScholarshipCommentReq
 com/example/demo/src/support_comment/model/PatchSupportCommentReq.java
  com.example.demo.src.support_comment.model.PatchSupportCommentReq
-com/example/demo/src/scholarship/ScholarshipController.java
- com.example.demo.src.scholarship.ScholarshipController
-com/example/demo/src/support_comment/model/SupportComment.java
- com.example.demo.src.support_comment.model.SupportComment
-com/example/demo/utils/JwtService.java
- com.example.demo.utils.JwtService
-com/example/demo/config/BaseException.java
- com.example.demo.config.BaseException
-com/example/demo/src/user/UserController.java
- com.example.demo.src.user.UserController
 com/example/demo/src/support_comment/model/DeleteSupportCommentReq.java
  com.example.demo.src.support_comment.model.DeleteSupportCommentReq
-com/example/demo/config/BaseResponse.java
- com.example.demo.config.BaseResponse
-com/example/demo/config/BaseResponseStatus.java
- com.example.demo.config.BaseResponseStatus
-com/example/demo/src/scholarship/ScholarshipProvider.java
- com.example.demo.src.scholarship.ScholarshipProvider
-com/example/demo/src/user/UserProvider.java
- com.example.demo.src.user.UserProvider
-com/example/demo/src/user/UserService.java
- com.example.demo.src.user.UserService
-com/example/demo/src/support_comment/SupportCommentService.java
- com.example.demo.src.support_comment.SupportCommentService
+com/example/demo/src/support_comment/model/SupportComment.java
+ com.example.demo.src.support_comment.model.SupportComment
+com/example/demo/src/support_comment/SupportCommentDao.java
+ com.example.demo.src.support_comment.SupportCommentDao
 com/example/demo/src/scholarship_comment/model/DeleteScholarshipCommentReq.java
  com.example.demo.src.scholarship_comment.model.DeleteScholarshipCommentReq
+com/example/demo/src/scholarship_comment/ScholarshipCommentDao.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentDao
+com/example/demo/src/user/UserProvider.java
+ com.example.demo.src.user.UserProvider
+com/example/demo/src/scholarship_comment/ScholarshipCommentService.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentService
+com/example/demo/src/user/UserController.java
+ com.example.demo.src.user.UserController
+com/example/demo/config/BaseResponse.java
+ com.example.demo.config.BaseResponse
+com/example/demo/src/support_comment/SupportCommentService.java
+ com.example.demo.src.support_comment.SupportCommentService
+com/example/demo/src/scholarship/ScholarshipProvider.java
+ com.example.demo.src.scholarship.ScholarshipProvider
 com/example/demo/src/support_comment/SupportCommentController.java
  com.example.demo.src.support_comment.SupportCommentController
+com/example/demo/src/user/UserService.java
+ com.example.demo.src.user.UserService
+com/example/demo/config/BaseResponseStatus.java
+ com.example.demo.config.BaseResponseStatus
 com/example/demo/src/support_comment/SupportCommentProvider.java
  com.example.demo.src.support_comment.SupportCommentProvider
 com/example/demo/src/scholarship_comment/ScholarshipCommentProvider.java
  com.example.demo.src.scholarship_comment.ScholarshipCommentProvider
-com/example/demo/src/scholarship_comment/ScholarshipCommentService.java
- com.example.demo.src.scholarship_comment.ScholarshipCommentService
-com/example/demo/src/scholarship_comment/ScholarshipCommentDao.java
- com.example.demo.src.scholarship_comment.ScholarshipCommentDao
-com/example/demo/src/support_comment/SupportCommentDao.java
- com.example.demo.src.support_comment.SupportCommentDao
+com/example/demo/config/BaseException.java
+ com.example.demo.config.BaseException
+com/example/demo/src/scholarship/ScholarshipController.java
+ com.example.demo.src.scholarship.ScholarshipController
+com/example/demo/utils/JwtService.java
+ com.example.demo.utils.JwtService
 com/example/demo/src/scholarship_comment/ScholarshipCommentCotroller.java
  com.example.demo.src.scholarship_comment.ScholarshipCommentCotroller

@@ -16,7 +16,7 @@ import static com.example.demo.config.BaseResponseStatus.INVALID_USER_JWT;
 import static com.example.demo.config.BaseResponseStatus.POST_COMMENT_EMPTY_CONTENT;
 
 @RestController
-@RequestMapping("/scholarship/comment")
+@RequestMapping("/scholarships/comment")
 public class ScholarshipCommentCotroller {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -61,6 +61,12 @@ public class ScholarshipCommentCotroller {
             return new BaseResponse<>(POST_COMMENT_EMPTY_CONTENT);
         }
         try {
+            Long userIdxByJwt = jwtService.getUserIdx();
+            Long user_idx = postScholarshipCommentReq.getUser_idx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(user_idx != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
             PostScholarshipCommentRes postScholarshipCommentRes = scholarshipCommentService.createScholarshipComment(postScholarshipCommentReq);
             return new BaseResponse<>(postScholarshipCommentRes);
         } catch (BaseException exception) {
@@ -103,8 +109,14 @@ public class ScholarshipCommentCotroller {
      */
     @ResponseBody
     @PatchMapping("/delete/{scholarship_comment_idx}")
-    public BaseResponse<String> deleteScholarshipComment(@PathVariable("scholarship_comment_idx") long scholarship_comment_idx) {
+    public BaseResponse<String> deleteScholarshipComment(@PathVariable("scholarship_comment_idx") long scholarship_comment_idx, @RequestBody ScholarshipComment scholarshipComment) {
         try {
+            Long userIdxByJwt = jwtService.getUserIdx();
+            Long user_idx = scholarshipComment.getUser_idx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(user_idx != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
             DeleteScholarshipCommentReq deleteScholarshipCommentReq = new DeleteScholarshipCommentReq(scholarship_comment_idx);
             scholarshipCommentService.deleteScholarshipComment(deleteScholarshipCommentReq);
 
