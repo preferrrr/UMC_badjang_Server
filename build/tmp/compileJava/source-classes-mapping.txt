@@ -72,8 +72,8 @@ com/example/demo/src/user/UserService.java
  com.example.demo.src.user.UserService
 com/example/demo/src/support_comment/SupportCommentService.java
  com.example.demo.src.support_comment.SupportCommentService
-com/example/demo/src/scholarship_comment/ScholarshipCommentCotroller.java
- com.example.demo.src.scholarship_comment.ScholarshipCommentCotroller
+com/example/demo/src/scholarship_comment/model/DeleteScholarshipCommentReq.java
+ com.example.demo.src.scholarship_comment.model.DeleteScholarshipCommentReq
 com/example/demo/src/support_comment/SupportCommentController.java
  com.example.demo.src.support_comment.SupportCommentController
 com/example/demo/src/support_comment/SupportCommentProvider.java
@@ -86,5 +86,5 @@ com/example/demo/src/scholarship_comment/ScholarshipCommentDao.java
  com.example.demo.src.scholarship_comment.ScholarshipCommentDao
 com/example/demo/src/support_comment/SupportCommentDao.java
  com.example.demo.src.support_comment.SupportCommentDao
-com/example/demo/src/scholarship_comment/model/DeleteScholarshipCommentReq.java
- com.example.demo.src.scholarship_comment.model.DeleteScholarshipCommentReq
+com/example/demo/src/scholarship_comment/ScholarshipCommentCotroller.java
+ com.example.demo.src.scholarship_comment.ScholarshipCommentCotroller

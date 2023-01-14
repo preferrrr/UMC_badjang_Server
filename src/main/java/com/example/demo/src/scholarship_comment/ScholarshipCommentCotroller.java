@@ -4,6 +4,7 @@ package com.example.demo.src.scholarship_comment;
 import com.example.demo.config.BaseException;
 import com.example.demo.config.BaseResponse;
 import com.example.demo.src.scholarship_comment.model.*;
+import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.example.demo.config.BaseResponseStatus.INVALID_USER_JWT;
 import static com.example.demo.config.BaseResponseStatus.POST_COMMENT_EMPTY_CONTENT;
 
 @RestController
@@ -23,9 +25,12 @@ public class ScholarshipCommentCotroller {
     @Autowired
     private final ScholarshipCommentService scholarshipCommentService;
 
-    public ScholarshipCommentCotroller(ScholarshipCommentProvider scholarshipCommentProvider, ScholarshipCommentService scholarshipCommentService){
+    private final JwtService jwtService;
+
+    public ScholarshipCommentCotroller(ScholarshipCommentProvider scholarshipCommentProvider, ScholarshipCommentService scholarshipCommentService, JwtService jwtService){
         this.scholarshipCommentProvider = scholarshipCommentProvider;
         this.scholarshipCommentService = scholarshipCommentService;
+        this.jwtService = jwtService;
     }
 
     /**
@@ -33,7 +38,6 @@ public class ScholarshipCommentCotroller {
      * [GET] /scholarship/comment?scholarship_idx=
      * @return BaseResponse<List<getScholarshipCommentRes>>
      */
-    //Query String
     @ResponseBody
     @GetMapping("") // (GET) 127.0.0.1:9000/app/users
     public BaseResponse<List<GetScholarshipCommentRes>> getScholarshipComment(@RequestParam(required = true) Long scholarship_idx) {
@@ -50,7 +54,6 @@ public class ScholarshipCommentCotroller {
      * 댓글 작성 API
      * [POST] /scholarship/comment/new-comment
      */
-    // Body
     @ResponseBody
     @PostMapping("/new-comment")
     public BaseResponse<PostScholarshipCommentRes> createScholarshipComment(@RequestBody PostScholarshipCommentReq postScholarshipCommentReq) {
@@ -67,13 +70,23 @@ public class ScholarshipCommentCotroller {
 
     /**
      * 댓글 수정 API
-     * [PATCH] /scholarship/modify/:scholarship_comment_idx
+     * [PATCH] /scholarship/comment/modify/:scholarship_comment_idx
      */
     @ResponseBody
     @PatchMapping("/modify/{scholarship_comment_idx}") // 게시글 작성자(userIdx)를 확인해서 맞으면 바꾸도록 할껀데 jwt토큰도 받아서 같이
     public BaseResponse<String> modifyScholarshipComment(@PathVariable("scholarship_comment_idx") long scholarship_comment_idx, @RequestBody ScholarshipComment scholarshipComment) {
         try {
-            // PathVariable로 들어온 idx랑 ScholarshipComment.getIdx한 거랑 같을 때만 수정 되도록 예외 처리 해줘야함
+            Long userIdxByJwt = jwtService.getUserIdx();
+            Long user_idx = scholarshipComment.getUser_idx();
+            //userIdx와 접근한 유저가 같은지 확인
+            if(user_idx != userIdxByJwt){
+                return new BaseResponse<>(INVALID_USER_JWT);
+            }
+            //수정할 댓글이 비었을 경우
+            if(scholarshipComment.getScholarship_comment_content() == null){
+                return new BaseResponse<>(POST_COMMENT_EMPTY_CONTENT);
+            }
+
             PatchScholarshipCommentReq patchScholarshipCommentReq = new PatchScholarshipCommentReq(scholarship_comment_idx, scholarshipComment.getScholarship_comment_content());
             scholarshipCommentService.modifyScholarshipComment(patchScholarshipCommentReq);
 
@@ -86,7 +99,7 @@ public class ScholarshipCommentCotroller {
 
     /**
      * 댓글 삭제 API
-     * [DELETE] /scholarship/delete/:scholarship_comment_idx
+     * [DELETE] /scholarship/comment/delete/:scholarship_comment_idx
      */
     @ResponseBody
     @PatchMapping("/delete/{scholarship_comment_idx}")

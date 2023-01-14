@@ -57,7 +57,7 @@ public class ScholarshipCommentService {
         try {
             int result = scholarshipCommentDao.deleteScholarshipComment(deleteScholarshipCommentReq);
             if(result == 0) {
-                throw new BaseException(DELETE_FAIL_COMMENT);
+                throw new BaseException(DELETE_COMMENT_FAIL);
             }
         } catch(Exception exception) {
             throw new BaseException(DATABASE_ERROR);
